@@ -15,7 +15,7 @@
       <input-number
           v-if="jsonProperty.type == 'integer'"
           :min="jsonProperty.minimum || Number.MIN_SAFE_INTEGER"
-          :val="parseInt(value) || 0"
+          :val="intValue"
           @input="handleUpdate"
       ></input-number>
 
@@ -74,6 +74,11 @@ export default {
     }
   },
   computed: {
+    intValue() {
+      if (this.value === null)
+        return null
+      return parseInt(this.value)
+    },
     placeholder() {
       return ""
     },

@@ -27,7 +27,7 @@ export default {
             "age": {
               "description": "Age in years",
               "type": "integer",
-              "minimum": 0
+              "minimum": 13
             },
             "netWorth": {
               "description": "individual net worth",
