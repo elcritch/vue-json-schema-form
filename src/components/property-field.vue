@@ -2,7 +2,13 @@
   <div class="">
     <label class="label">{{title}}</label>
     <p class="control has-icon has-icon-right">
-      <input class="input is-success" type="text" :placeholder="jsonProperty.description" :value="value">
+      <input
+          class="input is-success"
+          type="text"
+          :placeholder="jsonProperty.description"
+          :value="value"
+          @input="handleUpdate"
+      >
       <!-- <i class="fa fa-check"></i> -->
       <span class="help is-success">{{onSuccess}}</span>
     </p>
@@ -17,21 +23,14 @@
  */
 function splitWords(s) {
 var re, match, output = [];
-// re = /[A-Z]?[a-z]+/g
 	re = /([A-Za-z]?)([a-z]+)/g;
-/*
-	matches example: "oneTwoThree"
-	["one", "o", "ne"]
-	["Two", "T", "wo"]
-	["Three", "T", "hree"]
-	*/
+
 	match = re.exec(s);
-while (match) {
-// output.push(match.join(""));
-output.push([match[1].toUpperCase(), match[2]].join(""));
+  while (match) {
+    output.push([match[1].toUpperCase(), match[2]].join(""));
 		match = re.exec(s);
 	}
-return output;
+  return output;
 }
 
 export default {
@@ -39,6 +38,8 @@ export default {
   props: {
     'name': {
       type: String
+    },
+    'value': {
     },
     'json-property': {
       type: Object,
@@ -57,11 +58,9 @@ export default {
     }
   },
   methods: {
-    updatedValue(id, val) {
-      // console.log("updatedValue:: ", id, val)
-
-      var data = Object.assign({}, this.value, {[id]: val})
-      this.$emit('input', data)
+    handleUpdate(evt) {
+      console.log("handleUpdate:: ", evt)
+      this.$emit('input', evt.target.value)
     }
   },
   computed: {

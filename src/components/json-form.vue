@@ -9,6 +9,7 @@
               :name="name"
               :json-property="item"
               :options="{prettyField: true}"
+              v-model="dataModel[name]"
           >
           </property-field>
         </div>
@@ -55,11 +56,34 @@ export default {
     }
   },
   data() {
+    let defaultModel = this.createDefaultModel()
     return {
-      dataModel: {
-        "test": "value"
-      }
+      dataModel: Object.assign(defaultModel, {
+        "test": "value",
+        "firstName": "testing",
+      })
     }
+  },
+  methods: {
+    createDefaultModel() {
+      console.log("json-form:data::", JSON.stringify(this.schema.properties, null, 4))
+
+      var model = {}
+      for (var key in this.schema.properties) {
+        let value = this.schema.properties[key]
+
+        if (value.default) {
+          model[key] = value.default
+        }
+        else {
+          model[key] = "value " + key
+        }
+
+        console.log("json-form:field: ", key)
+      }
+
+      return model
+    },
   },
   components: {
     LabeledField,
