@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <json-form></json-form>
+    <json-form :schema="exampleSchemas.simple"></json-form>
   </div>
 </template>
 
@@ -9,6 +9,30 @@ import JsonForm from './components/json-form'
 
 export default {
   name: 'app',
+  data() {
+    return {
+      exampleSchemas: {
+        simple: {
+          "title": "Person",
+          "type": "object",
+          "properties": {
+            "firstName": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            },
+            "age": {
+              "description": "Age in years",
+              "type": "integer",
+              "minimum": 0
+            }
+        },
+          "required": ["firstName", "lastName"]
+        }
+      }
+    }
+  },
   components: {
     JsonForm
   }
