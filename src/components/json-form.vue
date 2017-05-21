@@ -6,11 +6,22 @@
 
       <div class="media">
         <div class="media-content">
-          <p class="title" v-if="schema.title"> {{schema.title}} </p>
+          <label class="title" v-if="schema.title"> {{schema.title}} </label>
+
+          <property-field v-for="(item, name) in schema.properties"
+              :key="name"
+              :name="name"
+              :json-property="item"
+              :options="{prettyField: true}"
+          >
+          </property-field>
         </div>
       </div>
+    </div>
 
-      <div class="box ">
+    <footer class="card-footer">
+
+      <div class="">
         <label class="is-pulled-left">Info:</label>
         <br />
         <labeled-field name="Type:" :value="schema.type" v-if="debug">
@@ -18,9 +29,7 @@
         <labeled-field name="Required:" :value="schema.required " v-if="debug">
         </labeled-field>
       </div>
-    </div>
 
-    <footer class="card-footer">
       <pre class="is-pulled-left has-text-left content">
         {{JSON.stringify(schema, null, 4)}}
       </pre>
@@ -32,6 +41,7 @@
 <script>
 
 import LabeledField from './labeled-field.vue'
+import PropertyField from './property-field.vue'
 
 export default {
   name: 'json-form',
@@ -48,7 +58,8 @@ export default {
     }
   },
   components: {
-    LabeledField
+    LabeledField,
+    PropertyField
   }
 }
 </script>

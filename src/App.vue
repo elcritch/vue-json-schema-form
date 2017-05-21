@@ -20,6 +20,7 @@ export default {
           "type": "object",
           "properties": {
             "firstName": {
+              "title": "First Name",
               "type": "string"
             },
             "lastName": {
