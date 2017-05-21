@@ -9,7 +9,8 @@
               :name="name"
               :json-property="item"
               :options="{prettyField: true}"
-              v-model="dataModel[name]"
+              v-bind:value="dataModel[name]"
+              @input="handleUpdate(name, $event)"
           >
           </property-field>
         </div>
@@ -29,7 +30,7 @@
 
     </footer>
 
-    <label>Model:</label>
+    <label>JSON Form Model:</label>
     <pre class="has-text-left ">{{JSON.stringify(dataModel, null, 4)}}</pre>
 
     <br />
@@ -52,20 +53,51 @@ export default {
     'schema': {
       type: Object
     },
-    'debug': {
-      default: false
+    'options': {
+      type: Object,
+      default() {
+        return {
+          debug: false,
+          includeNulls: false,
+          emitInvalidJson: false,
+        }
+      }
+    },
+    'value': {
+      type: Object
     }
   },
+  created() {
+  },
   data() {
-    let model = this.createDefaultModel()
     return {
-      dataModel: model,
+      dataModel: this.createDefaultModel(),
     }
   },
   methods: {
-    createDefaultModel() {
-      console.log("json-form:data::", JSON.stringify(this.schema.properties, null, 4))
+    handleUpdate(key, val) {
+      // console.log("json-form:handleUpdate::", JSON.stringify(val))
+      this.$set(this.dataModel, key, val)
+      // console.log("datamodel update", val)
 
+      var updateModel = Object.assign({}, this.dataModel)
+      if (!this.options.includeNulls) {
+        for (var key in updateModel) {
+          if (updateModel[key] === null)
+            delete updateModel[key]
+        }
+      }
+
+      let isJsonValid = this.validate()
+
+      if (isJsonValid == true || this.options.emitInvalidJson == true) {
+        this.$emit('input', updateModel)
+      }
+    },
+    validate() {
+      return true
+    },
+    createDefaultModel() {
       var model = {}
       for (var key in this.schema.properties) {
         let value = this.schema.properties[key]
@@ -75,13 +107,7 @@ export default {
         }
         else {
           model[key] = null
-          // if (value.type == 'integer')
-          //   model[key] = 0
-          // else
-          //   model[key] = ""
         }
-
-        // console.log("json-form:field: ", key)
       }
 
       return model

@@ -1,11 +1,11 @@
 <template>
   <div class="">
     <label class="label">{{title}}</label>
-    <p class="control has-icon has-icon-right">
+    <p class="control has-icon has-icon-right ">
 
       <input
           v-if="jsonProperty.type == 'string'"
-          class="input is-success"
+          class="input"
           type="text"
           :placeholder="jsonProperty.description"
           :value="value"
@@ -13,13 +13,17 @@
       >
 
       <input-number
+          class=""
           v-if="jsonProperty.type == 'integer'"
           :min="jsonProperty.minimum || Number.MIN_SAFE_INTEGER"
+          :max="jsonProperty.maximum || Number.MAX_SAFE_INTEGER"
+          :placeholder="jsonProperty.description"
           :val="intValue"
           @input="handleUpdate"
       ></input-number>
 
       <!-- <i class="fa fa-check"></i> -->
+      <span class="help is-success">{{onSuccess}}</span>
       <span class="help is-success">{{onSuccess}}</span>
     </p>
   </div>

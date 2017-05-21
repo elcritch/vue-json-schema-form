@@ -1,6 +1,16 @@
 <template>
   <div id="app">
-    <json-form :schema="exampleSchemas.simple" :debug="true"></json-form>
+    <label>Example Model:</label>
+    <pre class="has-text-left ">{{JSON.stringify(exampleModels.simple, null, 4)}}</pre>
+    <br />
+
+    <json-form
+        :schema="exampleSchemas.simple"
+        v-model="exampleModels.simple"
+        :options="{}"
+        :debug="true"
+    ></json-form>
+
   </div>
 </template>
 
@@ -12,6 +22,11 @@ export default {
   name: 'app',
   data() {
     return {
+      exampleModels: {
+        simple: {
+
+        }
+      },
       exampleSchemas: {
         simple: {
           "title": "Person",
@@ -38,6 +53,12 @@ export default {
         }
       }
     }
+  },
+  methods: {
+    handleUpdate(val) {
+      console.log("App:handleUpdate::", JSON.stringify(val))
+    },
+
   },
   components: {
     JsonForm
