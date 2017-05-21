@@ -1,17 +1,16 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <hello></hello>
+    <json-form></json-form>
   </div>
 </template>
 
 <script>
-import Hello from './components/Hello'
+import JsonForm from './components/json-form'
 
 export default {
   name: 'app',
   components: {
-    Hello
+    JsonForm
   }
 }
 </script>
