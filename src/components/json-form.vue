@@ -1,9 +1,10 @@
 <template>
   <div >
     <h2>Form Example</h2>
-    <pre >
+    <pre class="is-pulled-left has-text-left	">
       {{JSON.stringify(schema, null, 4)}}
     </pre>
+
   </div>
 </template>
 
@@ -21,3 +22,6 @@ export default {
   }
 }
 </script>
+
+<style>
+</style>

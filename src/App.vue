@@ -5,6 +5,9 @@
 </template>
 
 <script>
+import VueBlu from 'vue-blu'
+import 'vue-blu/dist/css/vue-blu.min.css'
+
 import JsonForm from './components/json-form'
 
 export default {
