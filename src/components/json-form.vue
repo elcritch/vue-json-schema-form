@@ -74,7 +74,11 @@ export default {
           model[key] = clone(value.default)
         }
         else {
-          model[key] = ""
+          model[key] = null
+          // if (value.type == 'integer')
+          //   model[key] = 0
+          // else
+          //   model[key] = ""
         }
 
         // console.log("json-form:field: ", key)

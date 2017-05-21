@@ -5,8 +5,6 @@
 </template>
 
 <script>
-import VueBlu from 'vue-blu'
-import 'vue-blu/dist/css/vue-blu.min.css'
 
 import JsonForm from './components/json-form'
 
@@ -30,6 +28,10 @@ export default {
               "description": "Age in years",
               "type": "integer",
               "minimum": 0
+            },
+            "netWorth": {
+              "description": "individual net worth",
+              "type": "integer",
             }
         },
           "required": ["firstName", "lastName"]

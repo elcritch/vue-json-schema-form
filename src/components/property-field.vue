@@ -2,13 +2,23 @@
   <div class="">
     <label class="label">{{title}}</label>
     <p class="control has-icon has-icon-right">
+
       <input
+          v-if="jsonProperty.type == 'string'"
           class="input is-success"
           type="text"
           :placeholder="jsonProperty.description"
           :value="value"
-          @input="handleUpdate"
+          @input="handleUpdate($event.target.value)"
       >
+
+      <input-number
+          v-if="jsonProperty.type == 'integer'"
+          :min="jsonProperty.minimum || Number.MIN_SAFE_INTEGER"
+          :val="parseInt(value) || 0"
+          @input="handleUpdate"
+      ></input-number>
+
       <!-- <i class="fa fa-check"></i> -->
       <span class="help is-success">{{onSuccess}}</span>
     </p>
@@ -58,9 +68,9 @@ export default {
     }
   },
   methods: {
-    handleUpdate(evt) {
+    handleUpdate(val) {
       // console.log("handleUpdate:: ", evt)
-      this.$emit('input', evt.target.value)
+      this.$emit('input', val)
     }
   },
   computed: {
