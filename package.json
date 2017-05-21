@@ -1,0 +1,7 @@
+{
+  "name": "vue-json-schema-form",
+  "version": "0.0.1",
+  "description": "JSON Schema based form generator",
+  "main": "index.js",
+  "license": "MIT"
+}
