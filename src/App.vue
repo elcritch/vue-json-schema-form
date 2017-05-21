@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <json-form :schema="exampleSchemas.simple"></json-form>
+    <json-form :schema="exampleSchemas.simple" :debug="true"></json-form>
   </div>
 </template>
 
