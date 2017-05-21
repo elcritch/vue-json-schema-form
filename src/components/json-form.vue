@@ -76,10 +76,10 @@ export default {
           model[key] = value.default
         }
         else {
-          model[key] = "value " + key
+          model[key] = ""
         }
 
-        console.log("json-form:field: ", key)
+        // console.log("json-form:field: ", key)
       }
 
       return model

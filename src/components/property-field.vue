@@ -59,7 +59,7 @@ export default {
   },
   methods: {
     handleUpdate(evt) {
-      console.log("handleUpdate:: ", evt)
+      // console.log("handleUpdate:: ", evt)
       this.$emit('input', evt.target.value)
     }
   },
