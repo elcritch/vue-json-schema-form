@@ -41,6 +41,7 @@
 </template>
 
 <script>
+import clone from 'clone';
 
 import LabeledField from './labeled-field.vue'
 import PropertyField from './property-field.vue'
@@ -73,7 +74,7 @@ export default {
         let value = this.schema.properties[key]
 
         if (value.default) {
-          model[key] = value.default
+          model[key] = clone(value.default)
         }
         else {
           model[key] = ""

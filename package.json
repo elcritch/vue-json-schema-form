@@ -12,6 +12,7 @@
     "test": "npm run unit"
   },
   "dependencies": {
+    "clone": "^2.1.1",
     "vue": "^2.2.6",
     "vue-blu": "^0.1.9"
   },
