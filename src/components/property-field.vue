@@ -56,6 +56,14 @@ export default {
     return {
     }
   },
+  methods: {
+    updatedValue(id, val) {
+      // console.log("updatedValue:: ", id, val)
+
+      var data = Object.assign({}, this.value, {[id]: val})
+      this.$emit('input', data)
+    }
+  },
   computed: {
     placeholder() {
       return ""

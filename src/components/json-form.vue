@@ -1,13 +1,9 @@
 <template>
   <div class="card is-fullwidth ">
     <div class="card-content ">
-      <!-- <labeled-field class="" name="Title:" :value="schema.title">
-      </labeled-field> -->
-
       <div class="media">
         <div class="media-content">
           <label class="title" v-if="schema.title"> {{schema.title}} </label>
-
           <property-field v-for="(item, name) in schema.properties"
               :key="name"
               :name="name"
@@ -21,19 +17,24 @@
 
     <footer class="card-footer">
 
-      <div class="">
+      <!-- <div class="">
         <label class="is-pulled-left">Info:</label>
         <br />
         <labeled-field name="Type:" :value="schema.type" v-if="debug">
         </labeled-field>
         <labeled-field name="Required:" :value="schema.required " v-if="debug">
         </labeled-field>
-      </div>
+      </div> -->
 
-      <pre class="is-pulled-left has-text-left content">
-        {{JSON.stringify(schema, null, 4)}}
-      </pre>
     </footer>
+
+    <label>Model:</label>
+    <pre class="has-text-left ">{{JSON.stringify(dataModel, null, 4)}}</pre>
+
+    <br />
+
+    <label>Schema:</label>
+    <pre class="has-text-left content">{{JSON.stringify(schema, null, 4)}}</pre>
 
   </div>
 </template>
@@ -53,8 +54,11 @@ export default {
       default: false
     }
   },
-  data () {
+  data() {
     return {
+      dataModel: {
+        "test": "value"
+      }
     }
   },
   components: {
