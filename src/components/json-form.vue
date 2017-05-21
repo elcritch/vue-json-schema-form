@@ -57,12 +57,9 @@ export default {
     }
   },
   data() {
-    let defaultModel = this.createDefaultModel()
+    let model = this.createDefaultModel()
     return {
-      dataModel: Object.assign(defaultModel, {
-        "test": "value",
-        "firstName": "testing",
-      })
+      dataModel: model,
     }
   },
   methods: {
