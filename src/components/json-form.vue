@@ -32,10 +32,10 @@
 
     </footer>
 
-    <label>JSON Form Model:</label>
+    <!-- <label>JSON Form Model:</label>
     <pre class="has-text-left ">{{JSON.stringify(dataModel, null, 4)}}</pre>
 
-    <br />
+    <br /> -->
 
     <label>Schema:</label>
     <pre class="has-text-left content">{{JSON.stringify(schema, null, 4)}}</pre>
