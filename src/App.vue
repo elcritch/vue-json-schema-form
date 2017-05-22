@@ -38,6 +38,12 @@ export default {
             "lastName": {
               "type": "string"
             },
+            "about": {
+              "type": "string",
+              "interface": {
+                "kind": "textarea"
+              }
+            },
             "age": {
               "description": "Age in years",
               "type": "integer",

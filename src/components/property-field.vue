@@ -6,18 +6,23 @@
     <p class="control has-icon has-icon-right ">
       <tooltip :content="jsonProperty.description" :disabled="!displayTooltip">
 
-      <input
-          v-if="jsonProperty.type == 'string'"
-          class="input"
-          type="text"
+      <textarea class="textarea" type="text"
+          v-if="jsonProperty.type == 'string' && jsonProperty.interface.kind == 'textarea'"
           :placeholder="jsonProperty.description"
           :value="value"
           @input="handleUpdate($event.target.value)"
-      >
+      ></textarea>
+
+      <input class="input" type="text"
+          v-else-if="jsonProperty.type == 'string'"
+          :placeholder="jsonProperty.description"
+          :value="value"
+          @input="handleUpdate($event.target.value)"
+      ></input>
 
       <input-number
           class=""
-          v-if="jsonProperty.type == 'integer'"
+          v-else-if="jsonProperty.type == 'integer'"
           :min="jsonProperty.minimum || Number.MIN_SAFE_INTEGER"
           :max="jsonProperty.maximum || Number.MAX_SAFE_INTEGER"
           :placeholder="jsonProperty.description"

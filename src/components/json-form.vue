@@ -110,7 +110,8 @@ export default {
 
       var valid = this.schemaValidator(data);
 
-      if (!valid) console.log("json-form:errors:: ", this.schemaValidator.errors);
+      if (!valid)
+        console.log("json-form:errors:: ", this.schemaValidator.errors);
 
       return valid
     },
