@@ -57,7 +57,7 @@ export default {
               "description": "individual net worth",
               "type": "integer",
             },
-            "status": {
+            "marriage_status": {
               "type": "string",
               "enum": ["single", "married", "divorced"]
             }
