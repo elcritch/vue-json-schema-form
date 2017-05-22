@@ -7,7 +7,7 @@
     <json-form
         :schema="exampleSchemas.simple"
         v-model="exampleModels.simple"
-        :options="{}"
+        :options="{onlyEmitValid: false}"
         :debug="true"
     ></json-form>
 
@@ -24,7 +24,6 @@ export default {
     return {
       exampleModels: {
         simple: {
-
         }
       },
       exampleSchemas: {

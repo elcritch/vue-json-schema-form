@@ -47,6 +47,11 @@ import clone from 'clone';
 import LabeledField from './labeled-field.vue'
 import PropertyField from './property-field.vue'
 
+import Ajv from 'ajv';
+
+var ajv = new Ajv({allErrors: true, }); // options can be passed, e.g. {allErrors: true}
+
+
 export default {
   name: 'json-form',
   props: {
@@ -55,23 +60,28 @@ export default {
     },
     'options': {
       type: Object,
-      default() {
-        return {
-          debug: false,
-          includeNulls: false,
-          emitInvalidJson: false,
-        }
-      }
     },
     'value': {
       type: Object
     }
   },
-  created() {
+  computed: {
+    schemaValidator: function () {
+      // console.log("schema changed: ", this.schemaValidator)
+      return ajv.compile(this.schema);
+    },
+    opts: function () {
+      return Object.assign({}, this.$data.defaultOptions, this.options)
+    }
   },
   data() {
     return {
       dataModel: this.createDefaultModel(),
+      defaultOptions: {
+        debug: false,
+        includeNulls: false,
+        onlyEmitValid: false,
+      }
     }
   },
   methods: {
@@ -81,21 +91,27 @@ export default {
       // console.log("datamodel update", val)
 
       var updateModel = Object.assign({}, this.dataModel)
-      if (!this.options.includeNulls) {
+      if (!this.opts.includeNulls) {
         for (var key in updateModel) {
           if (updateModel[key] === null)
             delete updateModel[key]
         }
       }
 
-      let isJsonValid = this.validate()
+      let isJsonValid = this.validate(updateModel)
 
-      if (isJsonValid == true || this.options.emitInvalidJson == true) {
+      if (isJsonValid || !this.opts.onlyEmitValid) {
         this.$emit('input', updateModel)
       }
     },
-    validate() {
-      return true
+    validate(data) {
+      // console.log("validate:: ", this.schemaValidator)
+
+      var valid = this.schemaValidator(data);
+
+      if (!valid) console.log("json-form:errors:: ", this.schemaValidator.errors);
+
+      return valid
     },
     createDefaultModel() {
       var model = {}
