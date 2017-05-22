@@ -1,9 +1,21 @@
 <template>
-  <div class="">
-    <label class="label">{{title}}</label>
+  <div class="container">
 
+    <div class="level">
+      <div class="level-left">
+        <label class="label">{{title}}</label>
+      </div>
+      <div class="level-right">
+        <!-- <span class="help is-success">
+          <i class="fa fa-check"></i>
+        </span> -->
+        <span class="help is-danger" v-if="errorMessage">
+          {{errorMessage}}
+          <i class="fa fa-close"></i>
+        </span>
+      </div>
+    </div>
 
-    <p class="control has-icon has-icon-right ">
       <tooltip :content="jsonProperty.description" :disabled="!displayTooltip">
 
       <span class="select"
@@ -17,7 +29,7 @@
         </select>
       </span>
 
-      <textarea class="textarea" type="text"
+      <textarea class="input textarea" type="text"
           v-else-if="jsonProperty.type == 'string' && jsonProperty.interface && jsonProperty.interface.kind == 'textarea'"
           :placeholder="jsonProperty.description"
           :value="value"
@@ -41,12 +53,8 @@
           @input="handleUpdate"
       ></input-number>
 
-      <!-- <i class="fa fa-check"></i> -->
-      <span class="help is-success">{{onSuccess}}</span>
-      <span class="help is-success">{{onSuccess}}</span>
-
-    </tooltip>
-    </p>
+      <!-- <span class="help ">{{jsonProperty.description}}</span> -->
+      </tooltip>
   </div>
 </template>
 
@@ -83,6 +91,10 @@ export default {
     'options': {
       type: Object,
       default: {}
+    },
+    'error-message': {
+      type: String,
+      default: null
     },
     'on-success': {
       type: Function

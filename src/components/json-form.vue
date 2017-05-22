@@ -1,13 +1,15 @@
 <template>
-  <div class="card is-fullwidth ">
+  <div class="card is-fullwidth">
     <div class="card-content ">
       <div class="media">
         <div class="media-content">
           <label class="title" v-if="schema.title"> {{schema.title}} </label>
-          <property-field v-for="(item, name) in schema.properties"
+
+          <property-field class="control" v-for="(item, name) in schema.properties"
               :key="name"
               :name="name"
               :json-property="item"
+              :error-message="dataErrors[name]"
               :options="{prettyField: true, descriptionTooltips: opts.descriptionTooltips}"
               v-bind:value="dataModel[name]"
               @input="handleUpdate(name, $event)"
@@ -80,6 +82,7 @@ export default {
   data() {
     return {
       dataModel: this.createDefaultModel(),
+      dataErrors: {},
       defaultOptions: {
         debug: false,
         includeNulls: false,
@@ -115,8 +118,18 @@ export default {
 
       var valid = this.schemaValidator(data);
 
-      if (!valid)
-        console.log("json-form:errors:: ", this.schemaValidator.errors);
+      var errors = {}
+      if (!valid) {
+        // console.log("json-form:errors:: ", this.schemaValidator.errors);
+
+        this.schemaValidator.errors.forEach(function (err) {
+          if (err.keyword == "required") {
+            errors[err.params.missingProperty] = "required"
+          }
+        })
+
+      }
+      this.$data.dataErrors = errors
 
       return valid
     },

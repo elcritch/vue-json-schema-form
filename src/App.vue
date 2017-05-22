@@ -6,13 +6,17 @@
     <pre class="has-text-left ">{{JSON.stringify(exampleModels.simple, null, 4)}}</pre>
     <br />
 
-    <json-form
-        :schema="exampleSchemas.simple"
-        v-model="exampleModels.simple"
-        :valid.sync="exampleModels.simpleIsValid"
-        :options="{onlyEmitValid: false, descriptionTooltips: true}"
-        :debug="true"
-    ></json-form>
+    <div class="columns">
+      <div class="column is-6">
+      <json-form
+          :schema="exampleSchemas.simple"
+          v-model="exampleModels.simple"
+          :valid.sync="exampleModels.simpleIsValid"
+          :options="{onlyEmitValid: false, descriptionTooltips: true}"
+          :debug="true"
+      ></json-form>
+      </div>
+    </div>
 
   </div>
 </template>
@@ -80,12 +84,4 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
