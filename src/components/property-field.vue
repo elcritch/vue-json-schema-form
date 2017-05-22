@@ -7,7 +7,7 @@
       <tooltip :content="jsonProperty.description" :disabled="!displayTooltip">
 
       <textarea class="textarea" type="text"
-          v-if="jsonProperty.type == 'string' && jsonProperty.interface.kind == 'textarea'"
+          v-if="jsonProperty.type == 'string' && jsonProperty.interface && jsonProperty.interface.kind == 'textarea'"
           :placeholder="jsonProperty.description"
           :value="value"
           @input="handleUpdate($event.target.value)"
