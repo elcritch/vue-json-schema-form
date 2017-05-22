@@ -1,12 +1,15 @@
 <template>
   <div id="app">
     <label>Example Model:</label>
+    <br />
+    <span class="has-text-left ">Valid: {{exampleModels.simpleIsValid}}</span>
     <pre class="has-text-left ">{{JSON.stringify(exampleModels.simple, null, 4)}}</pre>
     <br />
 
     <json-form
         :schema="exampleSchemas.simple"
         v-model="exampleModels.simple"
+        :valid.sync="exampleModels.simpleIsValid"
         :options="{onlyEmitValid: false, descriptionTooltips: true}"
         :debug="true"
     ></json-form>
@@ -24,7 +27,8 @@ export default {
     return {
       exampleModels: {
         simple: {
-        }
+        },
+        simpleIsValid: null
       },
       exampleSchemas: {
         simple: {

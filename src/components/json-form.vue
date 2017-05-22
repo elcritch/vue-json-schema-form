@@ -63,6 +63,9 @@ export default {
     },
     'value': {
       type: Object
+    },
+    'valid': {
+      type: Boolean
     }
   },
   computed: {
@@ -100,6 +103,8 @@ export default {
       }
 
       let isJsonValid = this.validate(updateModel)
+
+      this.$emit('update:valid', isJsonValid)
 
       if (isJsonValid || !this.opts.onlyEmitValid) {
         this.$emit('input', updateModel)
