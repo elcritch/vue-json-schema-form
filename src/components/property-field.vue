@@ -6,8 +6,19 @@
     <p class="control has-icon has-icon-right ">
       <tooltip :content="jsonProperty.description" :disabled="!displayTooltip">
 
+      <span class="select"
+          v-if="jsonProperty.type == 'string' && jsonProperty.enum "
+      >
+        <select
+          :value="value"
+          @input="handleUpdate($event.target.value)"
+        >
+          <option :value="enumOpt" v-for="enumOpt in jsonProperty.enum">{{enumOpt}}</option>
+        </select>
+      </span>
+
       <textarea class="textarea" type="text"
-          v-if="jsonProperty.type == 'string' && jsonProperty.interface && jsonProperty.interface.kind == 'textarea'"
+          v-else-if="jsonProperty.type == 'string' && jsonProperty.interface && jsonProperty.interface.kind == 'textarea'"
           :placeholder="jsonProperty.description"
           :value="value"
           @input="handleUpdate($event.target.value)"
