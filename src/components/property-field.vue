@@ -1,7 +1,10 @@
 <template>
   <div class="">
     <label class="label">{{title}}</label>
+
+
     <p class="control has-icon has-icon-right ">
+      <tooltip :content="jsonProperty.description" :disabled="!displayTooltip">
 
       <input
           v-if="jsonProperty.type == 'string'"
@@ -25,6 +28,8 @@
       <!-- <i class="fa fa-check"></i> -->
       <span class="help is-success">{{onSuccess}}</span>
       <span class="help is-success">{{onSuccess}}</span>
+
+    </tooltip>
     </p>
   </div>
 </template>
@@ -69,6 +74,9 @@ export default {
   },
   data () {
     return {
+      defaultOptions: {
+        descriptionTooltips: true,
+      }
     }
   },
   methods: {
@@ -78,6 +86,13 @@ export default {
     }
   },
   computed: {
+    opts: function () {
+      return Object.assign({}, this.$data.defaultOptions, this.options)
+    },
+    displayTooltip() {
+      if (typeof this.jsonProperty.description == 'string' && this.opts.descriptionTooltips)
+        return true
+    },
     intValue() {
       if (this.value === null)
         return null

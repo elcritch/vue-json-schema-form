@@ -7,7 +7,7 @@
     <json-form
         :schema="exampleSchemas.simple"
         v-model="exampleModels.simple"
-        :options="{onlyEmitValid: false}"
+        :options="{onlyEmitValid: false, descriptionTooltips: true}"
         :debug="true"
     ></json-form>
 

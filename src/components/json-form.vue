@@ -8,7 +8,7 @@
               :key="name"
               :name="name"
               :json-property="item"
-              :options="{prettyField: true}"
+              :options="{prettyField: true, descriptionTooltips: opts.descriptionTooltips}"
               v-bind:value="dataModel[name]"
               @input="handleUpdate(name, $event)"
           >
@@ -81,6 +81,7 @@ export default {
         debug: false,
         includeNulls: false,
         onlyEmitValid: false,
+        descriptionTooltips: true,
       }
     }
   },
